@@ -23,12 +23,13 @@ public class AutoInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (!(handler instanceof HandlerMethod)){
-            log.info("非方法校验放行.");
+            log.debug("非方法校验放行.");
             return true;
         }
         Method method = ((HandlerMethod) handler).getMethod();
         if (method.getAnnotation(Authorization.class) == null){
-            log.info("无需验证放行.");
+            log.debug("无需验证放行.");
+            return true;
         }
         String token =  request.getHeader("token") == null ? "" : request.getHeader("token").trim();
         if(tokenValidation(token)){
