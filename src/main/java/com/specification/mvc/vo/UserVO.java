@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
  * @Date 2022/11/9
  */
 @Data
+@UserValidate
 public class UserVO {
     @NotBlank
     private String userName;
